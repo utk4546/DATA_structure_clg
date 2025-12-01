@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *next, *prev;
+};
+
+node *first, *temp,*ttemp, *p;
+
+void init() {
+    first = temp = p = NULL;
+}
+
+void create_first(int val) {
+    first = new node;
+    first->data = val;
+    first->next = NULL;
+    first->prev = NULL;
+}
+
+void add_node(int x) {
+    temp = first;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    p = new node;
+    p->data = x;
+    p->next = NULL;
+    p->prev = temp;
+
+    temp->next = p;   
+}
+
+
+void delete_firstnode(){
+    if(first==NULL){
+        cout<<"list is empty";
+    }else if(first->next==NULL){
+        temp=first;
+        delete temp;
+    }
+    temp=first;
+    ttemp=temp->next;
+     first=ttemp;
+    ttemp->prev=NULL;
+    temp->next=NULL;
+    delete temp;
+}
+
+void disp() {
+    temp = first;
+    while (temp != NULL) {
+        cout << temp->data << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    init();
+    create_first(10);
+    add_node(20);
+    add_node(30);
+    add_node(40);
+    add_node(50);
+   delete_firstnode();
+    
+    disp();
+}
